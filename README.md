@@ -1,27 +1,67 @@
 # AI Object Recognition Web App
 
-## Scenario
+## Overview
 
-### What?
-利用 **Azure** 架設網站，並使用 **AI 技術辨識與分類物體**。
+This project is a web-based application deployed on **Azure** that utilizes **AI technology** for real-time object recognition and classification. By leveraging **OpenCV.js** and a **KNN-Classifier**, the application enables users to train the model directly in the browser to identify and categorize various objects using a webcam.
 
-### How?
-使用 **OpenCV.js** 與 **KNN-Classifier**，讓使用者可以：
+## Features
 
-- 開啟視訊鏡頭並記錄要分類的物品。  
-- 對輸入的物品取得特徵點並分類。  
-- 將分類完成的物品移至畫面中，即可輕鬆辨識物體類別。  
-- 自行增加物品分類及定義物品標籤。
+- **Real-time Video Capture**: access the user's webcam for live video input.
+- **Feature Extraction**: Automatically extracts features from objects presented in the video stream.
+- **Interactive Classification**:
+  - Train the model by recording examples of different objects.
+  - Classify objects in real-time based on the trained model.
+- **Customizable Labels**: Users can define new object categories and manage classification tags dynamically.
 
-網站透過 **Azure** 與 **Docker** 技術上架到網路上，使用者可直接線上使用上述功能。
+## Technology Stack
 
-## Techniques
+### Frontend & Logic
+- **HTML5, CSS3, JavaScript**
+- **OpenCV.js**: for computer vision processing.
+- **KNN-Classifier**: For K-Nearest Neighbors classification logic.
 
-**Programming Languages:**  
-HTML, CSS, JavaScript
+### Infrastructure & Deployment
+- **Docker**: Containerization of the web application.
+- **Nginx**: Web server for serving static files and handling SSL.
+- **Azure**: Cloud platform for hosting the application.
+- **OpenSSL**: Used for generating self-signed SSL certificates for secure HTTPS connections.
 
-**Tools & Libraries:**  
+## Getting Started
 
-- **OpenCV.js** 與 **KNN-Classifier**：進行圖像分類與辨識  
-- **OpenSSL**：生成自簽 SSL Certificate  
-- **Docker + Nginx**：將 Web Application 架設至 Azure Server
+### Prerequisites
+
+- [Docker](https://www.docker.com/get-started) installed on your machine.
+- A webcam connected to the computer.
+
+### Installation
+
+1.  **Clone the repository** (or download the source code):
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+
+2.  **Build the Docker image**:
+    ```bash
+    docker build -t ai-object-recognition .
+    ```
+
+3.  **Run the Docker container**:
+    ```bash
+    docker run -d -p 443:443 ai-object-recognition
+    ```
+
+4.  **Access the Application**:
+    Open your web browser and navigate to `https://localhost`.
+    *Note: You may need to accept the self-signed certificate warning.*
+
+## Usage
+
+1.  **Grant Camera Permission**: Allow the browser to access your webcam when prompted.
+2.  **Train the Model**:
+    - Select a class/label.
+    - Hold an object in front of the camera and press the "Train" (or corresponding) button to capture frames.
+    - Repeat for different objects/classes.
+3.  **Recognize Objects**:
+    - Once trained, the system will attempt to predict the class of the object currently in the camera frame.
+    - The predicted label and confidence score will be displayed on the screen.
